@@ -1,6 +1,27 @@
+import { HandHeart, HandHelping, Handshake, Heart, Package, Users, Clock3, Building2 } from 'lucide-react'
+import { useEffect } from 'react'
 import './App.css'
 
 function App() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -50px 0px' },
+    )
+
+    const animatedSections = document.querySelectorAll('.reveal')
+    animatedSections.forEach((section) => observer.observe(section))
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <div className="site">
       <header className="navbar" id="top">
@@ -22,7 +43,11 @@ function App() {
       </header>
 
       <main>
-        <section className="hero section">
+        <section className="hero section reveal">
+          <div className="hero-blob blob-one" aria-hidden="true" />
+          <div className="hero-blob blob-two" aria-hidden="true" />
+          <div className="float-dot dot-one" aria-hidden="true" />
+          <div className="float-dot dot-two" aria-hidden="true" />
           <div className="container hero-content">
             <p className="eyebrow">Student-Led Service Initiative</p>
             <h1>VitalServe Initiative</h1>
@@ -38,7 +63,7 @@ function App() {
           </div>
         </section>
 
-        <section id="about" className="section">
+        <section id="about" className="section reveal">
           <div className="container card">
             <h2>About VitalServe</h2>
             <p>
@@ -49,7 +74,7 @@ function App() {
           </div>
         </section>
 
-        <section id="project" className="section">
+        <section id="project" className="section reveal">
           <div className="container card">
             <h2>Our First Project: VitalCare Kits</h2>
             <p>
@@ -60,23 +85,27 @@ function App() {
           </div>
         </section>
 
-        <section id="involved" className="section">
+        <section id="involved" className="section reveal">
           <div className="container">
             <h2>Get Involved</h2>
             <div className="card-grid">
               <article className="action-card">
+                <HandHelping aria-hidden="true" className="card-icon" />
                 <h3>Volunteer</h3>
                 <p>Join kit-packing days, sorting events, and community outreach efforts.</p>
               </article>
               <article className="action-card">
+                <Heart aria-hidden="true" className="card-icon" />
                 <h3>Donate Supplies</h3>
                 <p>Contribute new hygiene and basic wellness items that go directly into care kits.</p>
               </article>
               <article className="action-card">
+                <HandHeart aria-hidden="true" className="card-icon" />
                 <h3>Organize a Drive</h3>
                 <p>Host a supply drive at your school, workplace, or community group.</p>
               </article>
               <article className="action-card">
+                <Handshake aria-hidden="true" className="card-icon" />
                 <h3>Partner With Us</h3>
                 <p>Collaborate as a local organization to help us reach more neighbors in need.</p>
               </article>
@@ -84,19 +113,19 @@ function App() {
           </div>
         </section>
 
-        <section id="impact" className="section">
+        <section id="impact" className="section reveal">
           <div className="container">
             <h2>Impact Tracker</h2>
             <div className="stats-grid">
-              <div className="stat-card"><span>Kits Delivered</span><strong>0</strong></div>
-              <div className="stat-card"><span>Volunteers</span><strong>0</strong></div>
-              <div className="stat-card"><span>Service Hours</span><strong>0</strong></div>
-              <div className="stat-card"><span>Partner Organizations</span><strong>0</strong></div>
+              <div className="stat-card"><Package aria-hidden="true" className="stat-icon" /><span>Kits Delivered</span><strong>0</strong></div>
+              <div className="stat-card"><Users aria-hidden="true" className="stat-icon" /><span>Volunteers</span><strong>0</strong></div>
+              <div className="stat-card"><Clock3 aria-hidden="true" className="stat-icon" /><span>Service Hours</span><strong>0</strong></div>
+              <div className="stat-card"><Building2 aria-hidden="true" className="stat-icon" /><span>Partner Organizations</span><strong>0</strong></div>
             </div>
           </div>
         </section>
 
-        <section className="section">
+        <section className="section reveal">
           <div className="container safety-note">
             <h2>Safety Note</h2>
             <p>
@@ -106,15 +135,14 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="section">
+        <section id="contact" className="section reveal">
           <div className="container card">
             <h2>Contact</h2>
             <p>Email: <a href="mailto:vitalserveinitiative@gmail.com">vitalserveinitiative@gmail.com</a></p>
             <ul className="social-links">
-              <li><a href="#" aria-label="TikTok">TikTok (coming soon)</a></li>
-              <li><a href="#" aria-label="Instagram">Instagram (coming soon)</a></li>
-              <li><a href="#" aria-label="YouTube">YouTube (coming soon)</a></li>
-              <li><a href="#" aria-label="X/Twitter">X / Twitter (coming soon)</a></li>
+              <li><a href="https://www.tiktok.com/@vitalserveinitiative" target="_blank" rel="noreferrer">TikTok</a></li>
+              <li><a href="https://www.instagram.com/vitalserveinitiative/" target="_blank" rel="noreferrer">Instagram</a></li>
+              <li><a href="https://www.youtube.com/@VitalServeInitiative" target="_blank" rel="noreferrer">YouTube</a></li>
             </ul>
           </div>
         </section>
