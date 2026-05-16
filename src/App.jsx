@@ -157,7 +157,7 @@ function App() {
           </div>
         </section>
 
-        <section id="involved" className="section reveal">
+        <section id="involved" className="section reveal section-tight-top">
           <div className="container">
             <p className="section-kicker">Community Action</p>
             <h2>Get Involved</h2>
