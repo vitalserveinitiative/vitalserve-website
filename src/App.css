@@ -27,6 +27,10 @@ html { scroll-behavior: smooth; }
 .container { width: min(1100px, 92%); margin: 0 auto; position: relative; z-index: 1; }
 .section { padding: 3.6rem 0; }
 .compact-top { padding-top: 2.7rem; }
+
+.section[id] { scroll-margin-top: 110px; }
+.section-tight-top { padding-top: 2rem; }
+
 .section-kicker { margin: 0 0 .5rem; font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--teal-600); }
 .section-subtitle { color: var(--muted); margin-bottom: 1.1rem; }
 
@@ -125,6 +129,7 @@ h2 { font-size: clamp(1.55rem, 3vw, 2.15rem); margin-bottom: .9rem; }
   .navbar-content { flex-direction: column; align-items: flex-start; }
   .section { padding: 3rem 0; }
   .compact-top { padding-top: 2rem; }
+  .section-tight-top { padding-top: 1.5rem; }
   .card, .safety-note { padding: 1.2rem; }
   .grid-two { grid-template-columns: 1fr; }
   .inside-grid { grid-template-columns: 1fr; }
