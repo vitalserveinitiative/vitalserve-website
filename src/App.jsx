@@ -1,19 +1,23 @@
 import {
   Bandage,
+  Building2,
+  Clock3,
+  Droplets,
   HandHeart,
   HandHelping,
   Handshake,
   Heart,
+  Instagram,
+  Music2,
   Package,
-  ShieldCheck,
-  Sparkles,
-  Users,
-  Clock3,
-  Building2,
-  Droplets,
   PillBottle,
+  ShieldCheck,
   SoapDispenserDroplet,
+  Sparkles,
   SprayCan,
+  Target,
+  Users,
+  Youtube,
 } from 'lucide-react'
 import { useEffect } from 'react'
 import './App.css'
@@ -22,7 +26,7 @@ function LogoMark({ large = false }) {
   return (
     <span className={`logo-mark ${large ? 'logo-mark-lg' : ''}`} aria-hidden="true">
       <span className="logo-ring" />
-      <span className="logo-heart"><Heart size={large ? 12 : 9} /></span>
+      <span className="logo-heart"><Heart size={large ? 12 : 8} /></span>
       <span className="logo-text">VS</span>
     </span>
   )
@@ -99,7 +103,7 @@ function App() {
           </div>
         </section>
 
-        <section id="about" className="section reveal">
+        <section id="about" className="section reveal compact-top">
           <div className="container card layered-card">
             <p className="section-kicker">Our Mission</p>
             <h2>About VitalServe</h2>
@@ -108,10 +112,15 @@ function App() {
               Our mission is to improve access to hygiene and basic wellness supplies by coordinating volunteers,
               collecting needed items, and working with local partners to serve people with dignity and consistency.
             </p>
+            <div className="mini-grid">
+              <article className="mini-card"><Heart className="mini-icon" /><h3>Dignity</h3><p>We believe everyone deserves respectful, reliable support in everyday life.</p></article>
+              <article className="mini-card"><Package className="mini-icon" /><h3>Practical Support</h3><p>We focus on useful essentials people can immediately put to use.</p></article>
+              <article className="mini-card"><Handshake className="mini-icon" /><h3>Local Partnerships</h3><p>We work with nearby community partners to deliver support responsibly.</p></article>
+            </div>
           </div>
         </section>
 
-        <section id="project" className="section reveal">
+        <section id="project" className="section reveal compact-top">
           <div className="container grid-two">
             <div className="card layered-card">
               <p className="section-kicker">Current Project</p>
@@ -120,18 +129,30 @@ function App() {
                 Each VitalCare Kit is packed with useful, everyday items like toothbrushes, soap, deodorant,
                 socks, wipes, hand sanitizer, and basic first-aid supplies to provide simple practical support.
               </p>
+              <h3 className="inside-title">What&apos;s Inside a VitalCare Kit</h3>
+              <div className="inside-grid">
+                <span><Package size={16} /> Toothbrush</span>
+                <span><PillBottle size={16} /> Toothpaste</span>
+                <span><SoapDispenserDroplet size={16} /> Soap</span>
+                <span><SprayCan size={16} /> Deodorant</span>
+                <span><Package size={16} /> Socks</span>
+                <span><Droplets size={16} /> Wipes</span>
+                <span><Package size={16} /> Tissues</span>
+                <span><SprayCan size={16} /> Hand sanitizer</span>
+                <span><Bandage size={16} /> Bandages</span>
+              </div>
             </div>
 
-            <aside className="kit-visual card" aria-label="VitalCare kit contents visual">
-              <h3>Typical kit contents</h3>
-              <div className="kit-items">
-                <span><PillBottle size={16} /> Toothbrush + toothpaste</span>
-                <span><SoapDispenserDroplet size={16} /> Soap</span>
-                <span><Droplets size={16} /> Wipes</span>
-                <span><SprayCan size={16} /> Hand sanitizer</span>
-                <span><Package size={16} /> Socks</span>
-                <span><Bandage size={16} /> Basic first-aid</span>
-              </div>
+            <aside className="kit-visual card" aria-label="VitalServe first goal overview">
+              <p className="section-kicker">Our First Goal</p>
+              <h3>Starting with a focused, honest launch.</h3>
+              <ul className="goal-list">
+                <li><Target size={16} /> 100 VitalCare Kits</li>
+                <li><Building2 size={16} /> 1 local community partner</li>
+                <li><Users size={16} /> Student volunteers</li>
+                <li><ShieldCheck size={16} /> Safe hygiene and basic wellness supplies only</li>
+              </ul>
+              <p className="goal-note">This is our first target and is not yet completed.</p>
             </aside>
           </div>
         </section>
@@ -161,22 +182,12 @@ function App() {
               <div className="stat-card"><Clock3 aria-hidden="true" className="stat-icon" /><span>Service Hours</span><strong>0</strong></div>
               <div className="stat-card"><Building2 aria-hidden="true" className="stat-icon" /><span>Partner Organizations</span><strong>0</strong></div>
             </div>
-            <div className="goal-card card">
-              <div className="goal-head">
-                <h3>VitalCare Kit Goal</h3>
-                <span>0 / 100 kits</span>
-              </div>
-              <div className="goal-track" role="img" aria-label="Progress toward 100 VitalCare kits, currently zero">
-                <span className="goal-fill" style={{ width: '0%' }} />
-              </div>
-              <p>Our first milestone is preparing 100 kits. Progress will be updated publicly as distribution begins.</p>
-            </div>
           </div>
         </section>
 
         <section className="section reveal">
           <div className="container safety-note">
-            <h2>Safety Note</h2>
+            <h2><ShieldCheck size={20} /> Safety Note</h2>
             <p>
               VitalServe only collects and distributes safe hygiene and basic wellness supplies. We do not collect
               or distribute medications, prescription items, needles, or used medical equipment.
@@ -190,9 +201,9 @@ function App() {
             <h2>Contact</h2>
             <p>Email: <a href="mailto:vitalserveinitiative@gmail.com">vitalserveinitiative@gmail.com</a></p>
             <ul className="social-links">
-              <li><a href="https://www.youtube.com/@VitalServeInitiative" target="_blank" rel="noreferrer">YouTube</a></li>
-              <li><a href="https://www.instagram.com/vitalserveinitiative/" target="_blank" rel="noreferrer">Instagram</a></li>
-              <li><a href="https://www.tiktok.com/@vitalserveinitiative" target="_blank" rel="noreferrer">TikTok</a></li>
+              <li><a href="https://www.youtube.com/@VitalServeInitiative" target="_blank" rel="noreferrer"><Youtube size={18} /> YouTube</a></li>
+              <li><a href="https://www.instagram.com/vitalserveinitiative/" target="_blank" rel="noreferrer"><Instagram size={18} /> Instagram</a></li>
+              <li><a href="https://www.tiktok.com/@vitalserveinitiative" target="_blank" rel="noreferrer"><Music2 size={18} /> TikTok</a></li>
             </ul>
           </div>
         </section>
