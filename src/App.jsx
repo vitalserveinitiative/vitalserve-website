@@ -28,202 +28,93 @@ import './App.css'
 
 
 const kitItems = [
-  {
-    title: 'Toothbrush',
-    description: 'Supports basic daily oral hygiene and helps recipients maintain a cleaner, healthier routine.',
-    tag: 'Hygiene Essential',
-    Icon: Sparkles,
-    position: 'toothbrush',
-  },
-  {
-    title: 'Toothpaste',
-    description: 'Paired with a toothbrush to support simple oral care and everyday hygiene.',
-    tag: 'Oral Care',
-    Icon: PillBottle,
-    position: 'toothpaste',
-  },
-  {
-    title: 'Soap',
-    description: 'A basic hygiene essential for washing hands and maintaining cleanliness.',
-    tag: 'Hygiene Essential',
-    Icon: SoapDispenserDroplet,
-    position: 'soap',
-  },
-  {
-    title: 'Deodorant',
-    description: 'Helps provide comfort, confidence, and dignity throughout the day.',
-    tag: 'Comfort & Dignity',
-    Icon: SprayCan,
-    position: 'deodorant',
-  },
-  {
-    title: 'Wipes',
-    description: 'Useful for quick cleaning when access to showers or sinks may be limited.',
-    tag: 'Everyday Care',
-    Icon: PackageOpen,
-    position: 'wipes',
-  },
-  {
-    title: 'Tissues',
-    description: 'A simple everyday item for comfort, cleanliness, and personal care.',
-    tag: 'Personal Care',
-    Icon: FileText,
-    position: 'tissues',
-  },
-  {
-    title: 'Hand Sanitizer',
-    description: 'Helps support hand hygiene when soap and water are not immediately available.',
-    tag: 'Hand Hygiene',
-    Icon: Droplets,
-    position: 'sanitizer',
-  },
-  {
-    title: 'Bandages',
-    description: 'Provides basic first-aid support for small cuts, scrapes, or minor everyday needs.',
-    tag: 'Basic Wellness',
-    Icon: Bandage,
-    position: 'bandages',
-  },
-  {
-    title: 'Note Card',
-    description: 'A short message of encouragement to remind each recipient that they are valued.',
-    tag: 'Encouragement',
-    Icon: Mail,
-    position: 'note-card',
-  },
+  { title: 'Toothbrush', tag: 'Oral Care', description: 'Supports basic daily oral hygiene and helps recipients maintain a cleaner routine.', icon: '🪥' },
+  { title: 'Toothpaste', tag: 'Oral Care', description: 'Paired with a toothbrush to support simple, everyday dental care.', icon: '🦷' },
+  { title: 'Soap', tag: 'Hygiene', description: 'A basic hygiene essential for handwashing, cleanliness, and daily care.', icon: '🧼' },
+  { title: 'Deodorant', tag: 'Comfort', description: 'Helps provide comfort, confidence, and dignity throughout the day.', icon: '✨' },
+  { title: 'Wipes', tag: 'Quick Clean', description: 'Useful for quick cleaning when access to showers or sinks may be limited.', icon: '🧻' },
+  { title: 'Tissues', tag: 'Daily Care', description: 'A simple everyday item for comfort, cleanliness, and personal care.', icon: '📄' },
+  { title: 'Hand Sanitizer', tag: 'Hand Hygiene', description: 'Helps support hand hygiene when soap and water are not immediately available.', icon: '💧' },
+  { title: 'Bandages', tag: 'Basic First Aid', description: 'Provides basic support for small cuts, scrapes, or minor everyday needs.', icon: '🩹' },
+  { title: 'Note Card', tag: 'Encouragement', description: 'A short message of support to remind each recipient that they are valued.', icon: '💌' },
 ]
 
-function KitItemCard({ item, index, isActive }) {
-  const { Icon } = item
-
-  return (
-    <article
-      className={`kit-item-card kit-item-${item.position} ${isActive ? 'active' : ''}`}
-      aria-label={`${item.title}: ${item.description}`}
-    >
-      <span className="kit-item-number">{String(index + 1).padStart(2, '0')}</span>
-      <span className="kit-item-icon" aria-hidden="true"><Icon size={21} /></span>
-      <strong>{item.title}</strong>
-      <small>{item.tag}</small>
-    </article>
-  )
-}
-
-function KitVisual({ activeItem }) {
-  const active = kitItems[activeItem] ?? kitItems[0]
-  const ActiveIcon = active.Icon
-
-  return (
-    <div className="kit-visual-sticky" aria-label="Interactive VitalCare Kit contents visual">
-      <div className="kit-visual-shell">
-        <div className="kit-connector" aria-hidden="true" />
-        <div className="kit-bag-visual" role="img" aria-label="Illustration of a VitalServe VitalCare Kit bag">
-          <div className="bag-cord" aria-hidden="true" />
-          <div className="bag-logo"><LogoMark /></div>
-          <span>VitalCare</span>
-          <small>Hygiene + wellness essentials</small>
-        </div>
-        <div className="active-item-callout" aria-live="polite">
-          <span className="kit-item-icon" aria-hidden="true"><ActiveIcon size={18} /></span>
-          <div>
-            <strong>{active.title}</strong>
-            <small>{active.tag}</small>
-          </div>
-        </div>
-        {kitItems.map((item, index) => (
-          <KitItemCard key={item.title} item={item} index={index} isActive={activeItem === index} />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function ItemDetailPanel({ item, index, isActive, panelRef }) {
-  const { Icon } = item
-
-  return (
-    <article
-      ref={panelRef}
-      className={`kit-detail-panel ${isActive ? 'active' : ''}`}
-      data-kit-index={index}
-      tabIndex="0"
-    >
-      <div className="kit-detail-icon" aria-hidden="true"><Icon size={24} /></div>
-      <span className="kit-detail-number">{String(index + 1).padStart(2, '0')}</span>
-      <h3>{item.title}</h3>
-      <p>{item.description}</p>
-      <span className="kit-detail-tag"><CircleDot size={12} /> {item.tag}</span>
-    </article>
-  )
-}
-
 function KitContentsSection() {
-  const [activeItem, setActiveItem] = useState(0)
-  const itemRefs = useRef([])
+  const [activeKitItem, setActiveKitItem] = useState(0)
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduceMotion) return undefined
+    const id = setInterval(() => {
+      setActiveKitItem((current) => (current + 1) % kitItems.length)
+    }, 4500)
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
-
-        if (visibleEntries.length > 0) {
-          const nextIndex = Number(visibleEntries[0].target.dataset.kitIndex)
-          setActiveItem(nextIndex)
-        }
-      },
-      { threshold: [0.45, 0.6], rootMargin: '-35% 0px -35% 0px' },
-    )
-
-    itemRefs.current.forEach((panel) => {
-      if (panel) observer.observe(panel)
-    })
-
-    return () => observer.disconnect()
+    return () => clearInterval(id)
   }, [])
 
+  const activeItem = kitItems[activeKitItem]
+
   return (
-    <section id="kit-contents" className="kit-showcase reveal" aria-labelledby="kit-showcase-title">
-      <div className="kit-showcase-bg bg-one" aria-hidden="true" />
-      <div className="kit-showcase-bg bg-two" aria-hidden="true" />
+    <section id="kit-contents" className="kit-contents-section section reveal" aria-labelledby="kit-contents-title">
       <div className="container">
-        <div className="kit-showcase-header">
-          <p className="section-kicker">VitalCare Kit</p>
-          <h2 id="kit-showcase-title">What&apos;s Inside a VitalCare Kit</h2>
-          <p>
-            Each kit is designed with practical hygiene and basic wellness essentials that support comfort,
-            dignity, and everyday care.
-          </p>
-        </div>
-
-        <div className="kit-showcase-layout">
-          <KitVisual activeItem={activeItem} />
-          <div className="kit-detail-list" aria-label="VitalCare Kit item details">
-            {kitItems.map((item, index) => (
-              <ItemDetailPanel
-                key={item.title}
-                item={item}
-                index={index}
-                isActive={activeItem === index}
-                panelRef={(element) => { itemRefs.current[index] = element }}
-              />
-            ))}
+        <div className="kit-contents-shell">
+          <div className="kit-contents-header">
+            <p className="section-kicker">VITALCARE KIT</p>
+            <h2 id="kit-contents-title">What&apos;s Inside a VitalCare Kit</h2>
+            <p>
+              Each kit focuses on practical hygiene and basic wellness essentials that support comfort, dignity, and everyday care.
+            </p>
           </div>
-        </div>
 
-        <div className="kit-summary-card">
-          <div>
-            <p className="section-kicker">Final View</p>
+          <div className="kit-contents-layout">
+            <div className="kit-visual-card" aria-hidden="true">
+              <div className="kit-badge">VS</div>
+              <div className="kit-bag-shape">
+                <strong>VitalCare Kit</strong>
+                <span>Practical essentials</span>
+              </div>
+              <span className="floating-kit-chip chip-one">Hygiene</span>
+              <span className="floating-kit-chip chip-two">Wellness</span>
+              <span className="floating-kit-chip chip-three">Dignity</span>
+            </div>
+
+            <div>
+              <article className="kit-detail-card" key={activeItem.title}>
+                <span className="kit-detail-icon" aria-hidden="true">{activeItem.icon}</span>
+                <p className="kit-detail-tag">{activeItem.tag}</p>
+                <h3>{activeItem.title}</h3>
+                <p>{activeItem.description}</p>
+              </article>
+
+              <div className="kit-item-grid" role="list" aria-label="VitalCare Kit items">
+                {kitItems.map((item, index) => (
+                  <button
+                    key={item.title}
+                    type="button"
+                    className={`kit-item-card ${activeKitItem === index ? 'active' : ''}`}
+                    onClick={() => setActiveKitItem(index)}
+                    onMouseEnter={() => setActiveKitItem(index)}
+                    aria-pressed={activeKitItem === index}
+                  >
+                    <span className="kit-item-icon" aria-hidden="true">{item.icon}</span>
+                    <strong>{item.title}</strong>
+                    <small>{item.tag}</small>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="kit-cta-row">
+            <p className="kit-cta-title">Want to help prepare VitalCare Kits?</p>
+            <p className="kit-cta-text">Volunteers can help collect supplies, pack kits, organize drives, or connect us with local partners.</p>
+            <div className="kit-cta-actions">
+              <a className="btn btn-primary" href="#involved">Volunteer With Us</a>
+              <a className="btn btn-secondary" href="mailto:vitalserveinitiative@gmail.com">Partner With Us</a>
+            </div>
+          </div>
+
+          <div className="kit-summary-card">
             <h3>Simple items. Real support.</h3>
-            <p>VitalCare Kits focus on practical essentials that can help support hygiene, comfort, and dignity.</p>
-          </div>
-          <div className="kit-summary-actions">
-            <a className="btn btn-primary" href="#involved">Volunteer With Us</a>
-            <a className="btn btn-secondary" href="mailto:vitalserveinitiative@gmail.com">Partner With Us</a>
+            <p>VitalCare Kits are built around practical essentials that can help support hygiene, comfort, and dignity.</p>
           </div>
         </div>
       </div>
@@ -340,8 +231,7 @@ function App() {
                 simple practical support.
               </p>
               <p>
-                The interactive guide below replaces a basic contents list with a calm scroll experience that
-                explains how each essential supports hygiene, wellness, comfort, and dignity.
+                The section below highlights each kit item with a simple interactive view so supporters can quickly understand what goes into every VitalCare Kit.
               </p>
             </div>
 
